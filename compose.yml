@@ -1,0 +1,23 @@
+version: '3'
+
+services: 
+        backend:
+                env_file:
+                        ".env"
+                build:
+                        context: ./
+                        dockerfile: ./Dockerfile
+                image: "luisnvrr/blogs-app-backend"
+                ports:
+                        - "3003:3003"
+        frontend:
+                env_file:
+                        "../blogs-chakra-frontend/.env.local" 
+                build:
+                        context: ../blogs-chakra-frontend/
+                        dockerfile: ./Dockerfile
+                image: "luisnvrr/blogs-app-frontend"
+                ports:
+                        - "3000:3000"
+                links:
+                        - "backend:be"
